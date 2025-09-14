@@ -1,5 +1,6 @@
 from threading import Thread
 import threading, time, sys, os
+import winsound
 
 from PySide6.QtWidgets import QApplication
 
@@ -17,8 +18,20 @@ class TimerLogic:
     def run_timer(self):
         while not stop_event.is_set():
             if self.elapsed_time >= self.time_limit:
+                winsound.Beep(1000, 300)  # 1000 Hz for 400 ms
+                time.sleep(0.1)
+                winsound.Beep(1000, 200)
+                time.sleep(0.1)
+                winsound.Beep(1000, 200)
                 self.elapsed_time = 0
                 self.ui.update_timer_signal.emit(self.elapsed_time)
+
+            if self.time_limit - self.elapsed_time == 60:
+                winsound.Beep(1000, 200)
+            elif self.time_limit - self.elapsed_time == 30:
+                winsound.Beep(1000, 200)
+                time.sleep(0.1)
+                winsound.Beep(1000, 200)              
 
             time.sleep(1)
             self.elapsed_time += 1

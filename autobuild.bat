@@ -18,7 +18,7 @@ if exist dist (
 
 pyinstaller --noconfirm --onefile --windowed ^
 --icon "res\alarm.ico" ^
---name "fish" ^
+--name "alarm" ^
 --add-data "res;res" ^
 "src\main.py"
 
